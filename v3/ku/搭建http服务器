@@ -1,0 +1,17 @@
+const http=require('http');  //把http模块请求进来 核心模块更快 因为他已经编译好二进制代码了 第三方模块 还要现编译
+    http.createServer((request,response)=>{    //  http.createServer(function(request,response){  =>代表匿名函数
+        //浏览器发送请求后 会调用匿名函数 把 请求信息：地址 useragent 浏览器信息 请求提  自动赋给request
+        //响应头 给浏览器发出   成功啦 200  文本头是text
+        response.writeHead(200,{'Content-Type':'text/plain'});
+    //发出相应提 hello world
+    response.end('Hello World\n');
+}).listen(8142);
+console.log('Server running at http://127.0.0.1:8142');
+
+
+express 里的模版：
+
+1.ejs
+
+2.jade
+
