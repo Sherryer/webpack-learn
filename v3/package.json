@@ -5,8 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "start": "webpack --color --progress --watch",
-    "run": "webpack-dev-server --open",
-    "build": "webpack -p"
+    "dev": "webpack-dev-server --open",
+    "build": "webpack-p"
   },
   "author": "",
   "license": "ISC",

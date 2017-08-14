@@ -5,22 +5,35 @@ import lichking from './image/background.jpg'
 import css from './style.css';
 
 class Test extends Component {
-    componentDidCatch(error, info){
-        console.log("error")
+    constructor(props){
+        super(props);
+        this.state = {a:1, b:()=>("i am b") }
+    }
+
+    click(){
+        console.log(22222);
+        this.setState(function (state) {
+            return {
+                a: 2
+            }
+        })
     }
 
     render(){
-        aaa
+
         return(
             <div>
                 <div className={css.color}>
-                   1111
+                    {this.state.a},1111 {this.state.b()}
                 </div>
-                <img src={lichking} alt="" style={{"width":"300px"}}/>
+                <img src={lichking} onClick={this.click.bind(this)} alt="" style={{"width":"300px"}}/>
             </div>
         )
     }
 }
+
+
+
 
 ReactDom.render(
     <ErrorBoundary>

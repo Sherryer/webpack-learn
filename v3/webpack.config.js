@@ -53,9 +53,8 @@ module.exports = {
         ]
     },
     plugins: [
-        // new cleanWebpackPlugin(['dist']),
-        new webpackManifestPlugin(),
-
+        new cleanWebpackPlugin(['dist']),
+        new webpackManifestPlugin()
     ]
 
 };
