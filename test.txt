@@ -1,0 +1,36 @@
+1、css 单独打包
+
+webpack text extract plugin
+
+extract-text-webpack-plugin
+
+
+2、 react reactdom 不打包进去？exclude 只是不走loader 也会被打包？ 是这样吗
+
+webpack文档 externals
+    externals: {
+        react: 'React',
+        'react-dom': 'ReactDOM',
+    },
+
+
+
+https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
+
+3、 怎样才能让 treeshacking 生效
+
+要设置 { "modules": false } 非常重要
+            {
+                test: /\.jsx?$/,
+                use: [
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            "presets": ["react", ["env", { "modules": false }]]
+                        }
+                    }
+                ],
+                exclude: /node_modules/
+            }
+
+

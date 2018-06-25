@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="test/index.css">
+</head>
+<body>
+嘿嘿
+</body>
+<script src="./test/index.js"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('./test/index.js').then(function(registration) {
+                // Registration was successful
+                console.log('成功', registration.scope);
+            }).catch(function(err) {
+                // registration failed :(
+                console.log('失败', err);
+            });
+        });
+    }
+
+
+    var CACHE_NAME = 'my-site-cache-v1';
+    var urlsToCache = [
+        '/',
+        './test/index.css',
+        './test/index.js'
+    ];
+
+    self.addEventListener('install', function(event) {
+        // Perform install steps
+        event.waitUntil(
+            caches.open(CACHE_NAME)
+                .then(function(cache) {
+                    console.log('Opened cache');
+                    return cache.addAll(urlsToCache);
+                })
+        );
+    });
+</script>
+</html>

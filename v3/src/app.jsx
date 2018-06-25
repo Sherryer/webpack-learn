@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import ReactDom from 'react-dom';
-import ErrorBoundary from './ErrorBoundary.jsx';
+import ErrorBoundary from './public/ErrorBoundary.jsx';
 import lichking from './image/background.jpg'
 import css from './style.css';
+
+import Xixi from './testComponent/xixi'
 
 class Test extends Component {
     constructor(props){
@@ -10,21 +12,23 @@ class Test extends Component {
         this.state = {a:1, b:()=>("i am b") }
     }
 
-    click(){
-        console.log(22222);
-        this.setState(function (state) {
-            return {
-                a: 2
-            }
-        })
+    increment (state, props) {
+        return {a: state.a + 1};
     }
 
-    render(){
+    click(){
+        this.setState(this.increment);
+        this.setState(this.increment);
+        this.setState(this.increment);
+    }
 
+
+    render(){
         return(
             <div>
                 <div className={css.color}>
-                    {this.state.a},1111 {this.state.b()}
+                    {this.state.a},7788 {this.state.b()}
+                    {<Xixi/>}
                 </div>
                 <img src={lichking} onClick={this.click.bind(this)} alt="" style={{"width":"300px"}}/>
             </div>
@@ -33,12 +37,16 @@ class Test extends Component {
 }
 
 
-
-
 ReactDom.render(
     <ErrorBoundary>
         <Test/>
     </ErrorBoundary>
-    , document.getElementById("div"));
+    , document.getElementById("dom"));
 
 
+
+// if(module.hot){
+//     module.hot.accept( './testComponent/xixi', function(){
+//         console.log("11111 test update")
+//     });
+// }

@@ -1,0 +1,10 @@
+React.createContext()，用以替换老的Context API
+
+老的Context API有什么问题？官方为什么不推荐使用？
+
+简单说，就是如果context的值有更新时，没办法保证所有子节点一定能更新。
+为什么？因为在老的Context中由上而下的“触发链”有可能被shouldComponentUpdate打断。
+
+
+
+链接：https://zhuanlan.zhihu.com/p/34038469

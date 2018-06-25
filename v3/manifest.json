@@ -1,4 +1,5 @@
 {
   "boundle.js": "./dist/boundle.js",
+  "ceshi.js": "./dist/ceshi.js",
   "dist/background.jpg": "dist/background.jpg"
 }

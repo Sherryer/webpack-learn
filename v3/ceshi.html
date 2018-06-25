@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img src="" alt="" >
+</body>
+<script>
+    let myImage = document.querySelector('img');
+
+    fetch('./dist/background.jpg')
+        .then(function(response) {
+            console.log(response)
+            return response.blob();
+        })
+        .then(function(myBlob) {
+            let objectURL = URL.createObjectURL(myBlob);
+            console.log(myBlob)
+            console.log(objectURL)
+            myImage.src = objectURL;
+        });
+</script>
+</html>
