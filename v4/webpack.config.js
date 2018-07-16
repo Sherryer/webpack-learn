@@ -1,10 +1,20 @@
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const px2rem = require('postcss-px2rem')
+const path = require('path')
 
 module.exports = {
   module: {
     rules: [
+      {
+          test: /\.txt/,
+          use: [
+              {
+                  loader: path.resolve(__dirname, 'loader/01loader.js')
+              }
+          ],
+          exclude: /node_modules/
+      },
       {
         test: /\.jsx?$/,
         use: [

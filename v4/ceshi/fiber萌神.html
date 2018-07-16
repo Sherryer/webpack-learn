@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+</body>
+<script>
+
+    // var obj1={
+    //     name: 'obj1',
+    //     child: obj2,
+    //     sibling: null,
+    //     return: null
+    // }
+
+    // var obj2={
+    //     name: 'obj2',
+    //     child: obj3,
+    //     sibling: obj22,
+    //     return: obj1
+    // }
+
+    // var obj3={
+    //     name: 'obj3',
+    //     child: obj4,
+    //     sibling: obj23,
+    //     return: obj2,
+    // }
+
+    // var obj4={
+    //     name: 'obj4',
+    //     child: null,
+    //     sibling: obj24,
+    //     return: obj3,
+    // }
+
+    // var obj22={
+    //     name: 'obj22',
+    //     child: obj23,
+    //     sibling: obj32,
+    //     return: null,
+    // }
+
+    // var obj23={
+    //     name: 'obj23',
+    //     child: obj24,
+    //     sibling: null,
+    //     return: obj3,
+    // }
+
+    // var obj24={
+    //     name: 'obj24',
+    //     child: null,
+    //     sibling: obj34,
+    //     return: obj23,
+    // }
+
+    // var obj32={
+    //     name: 'obj32',
+    //     child: null,
+    //     sibling: obj42,
+    //     return: null,
+    // }
+
+    // var obj34={
+    //     name: 'obj34',
+    //     child: null,
+    //     sibling: obj44,
+    //     return: null,
+    // }
+
+    // var obj42={
+    //     name: 'obj42',
+    //     child: obj43,
+    //     sibling: null,
+    //     return: null,
+    // }
+
+    // var obj43={
+    //     name: 'obj43',
+    //     child: obj44,
+    //     sibling: null,
+    //     return: obj42,
+    // }
+
+    // var obj44={
+    //     name: 'obj44',
+    //     child: null,
+    //     sibling: null,
+    //     return: obj43,
+    // }
+
+
+    // obj1.child=obj2
+    // obj2.child=obj3
+    // obj2.sibling=obj22
+    // obj3.child=obj4
+    // obj3.sibling=obj23
+    // obj4.sibling=obj24
+
+    // obj22.child=obj23
+    // obj22.sibling=obj32
+    // obj23.child=obj24
+    // obj24.sibling=obj34
+
+    // obj32.sibling=obj42
+    // obj34.sibling=obj44
+
+    // obj42.child=obj43
+    // obj43.child=obj44
+
+
+
+    var root={
+        type: 'root',
+        childen: [
+            {
+                type: 'b1',
+                childen: [
+                    {
+                        type: 'c1'
+                    },
+                    {
+                        type: 'c2'
+                    }
+                ]
+            },
+            {
+                type: 'b2'
+            },
+            {
+                type: 'b3'
+            }
+        ]
+    }
+
+
+
+    var z=1
+
+
+    var queue=[root]
+    // ReacDOM.render = function (root, container) {
+    //     queue.push(root)
+    //     updateFiberAndView()
+    // }
+    function getVdomFormQueue() {
+        return queue.shift()
+    }
+    function Fiber(vnode) {
+        for(var i in vnode) {
+            this[i]=vnode[i]
+        }
+        this.uuid=Math.random();
+        this.time=0;
+    }
+    //我们简单的Fiber目前来看，只比vdom多了一个uuid属性
+    function toFiber(vnode) {
+        if(!vnode.uuid) {
+            return new Fiber(vnode)
+        }
+        return vnode
+    }
+
+    var hasVisited={}
+    function updateFiberAndView() {
+        debugger
+        var now=new Date-0;
+        var deadline=new Date+100;
+        // updateView() //更新视图，这会耗时，因此需要check时间
+
+        if(new Date+0<deadline) {
+            console.log('小于 dateline')
+            var vdom=getVdomFormQueue()
+            var fiber=vdom,firstFiber
+
+            do {//深度优先遍历
+                var fiber=toFiber(fiber);//A处
+                if(!firstFiber) {
+                    firstFiber=fiber
+                }
+                if(!hasVisited[fiber.uuid]) {
+                    hasVisited[fiber.uuid]=1
+                    //根据fiber.type实例化组件或者创建真实DOM
+                    //这会耗时，因此需要check时间
+                    updateComponentOrElement(fiber);
+                    if(fiber.child) {
+                        //向下转换
+                        if(true) {
+                            queue.push(fiber.child)//时间不够，放入栈
+                            break
+                        }
+                        fiber=fiber.child;
+                        continue  //让逻辑跑回A处，不断转换child, child.child, child.child.child
+                    }
+                }
+                //如果组件没有children，那么就向右找
+                if(fiber.sibling) {
+                    fiber=fiber.sibling;
+                    continue //让逻辑跑回A处
+                }
+                // 向上找
+                fiber=fiber.return
+                if(fiber===firstFiber||!fiber) {
+                    break
+                }
+            } while(1)
+        }
+        if(queue.length) {
+            setTimeout(updateFiberAndView,1000)
+        }
+    }
+
+    function updateComponentOrElement(fiber) {
+        var {type,stateNode={},props}=fiber
+        // if(!stateNode) {
+        //     if(typeof type==="string") {
+        //         fiber.stateNode=document.createElement(type)
+        //     } else {
+        //         var context={}//暂时免去这个获取细节
+        //         fiber.stateNode=new type(props,context)
+        //     }
+        // }
+        console.warn(type);
+        console.log(fiber);
+        fiber.time=fiber.time+1;
+        // if(stateNode.render) {
+        //     //执行componentWillMount等钩子
+        //     children=stateNode.render()
+        // } else {
+        //     children=fiber.childen
+        // }
+
+        children=fiber.childen;
+
+        if(!children) return;
+        // if(fiber.time===1) return;
+        var prev=null;
+        //这里只是mount的实现，update时还需要一个oldChildren, 进行key匹配，重复利用已有节点
+        for(var i=0,n=children.length;i<n;i++) {
+            var child=children[i];
+            child.return=fiber;
+            if(!prev) {
+                fiber.child=child
+            } else {
+                prev.sibling=child
+            }
+            prev=child;
+        }
+    }
+
+
+    // var z = []
+    // function updateComponentOrElement(a) {
+    //     z.push(a)
+    // }
+
+    updateFiberAndView()
+</script>
+
+</html>

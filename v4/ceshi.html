@@ -8,9 +8,13 @@
 <input type="text">
 </body>
 <script>
-    setTimeout(function () {
-        document.activeElement.blur()
-        console.log(111)
-    }, 1000)
+    function *  doWork (){
+        var a = 1;
+        yield
+        var b = a + 1;
+        yield
+        var c = a + b
+        return c
+    }
 </script>
 </html>

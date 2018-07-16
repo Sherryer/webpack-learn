@@ -8,26 +8,8 @@
   <div id="div"></div>
   <div id="dom"></div>
   </body>
-  <script src="http://webapp.didistatic.com/static/webapp/sofa/soda.js?v=2.0.1"></script>
-  <script type="text/javascript" src="./dist/ceshi.js"></script>
-  <!--<script type="text/javascript" src="./dist/boundle.js"></script>-->
+  <script type="text/javascript" src="./dist/page.js"></script>
   <script>
-      (function (doc, win) {
-          var docEl = doc.documentElement
-          var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
-          var recalc = function () {
-              var clientWidth = docEl.clientWidth
-              if (!clientWidth) return
-              // docEl.style.fontSize = 20 * (clientWidth / 320) + 'px'
-              docEl.style.fontSize = (clientWidth /16) + 'px'
-          }
-
-          if (!doc.addEventListener) return
-          win.addEventListener(resizeEvt, recalc, false)
-          recalc()
-          // hack兼容某些特殊机型
-          doc.addEventListener('DOMContentLoaded', recalc, false)
-      })(document, window)
 
   </script>
 </html>

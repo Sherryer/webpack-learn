@@ -9,7 +9,8 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin') //tree shacking 删除
 module.exports = {
     entry: {
         boundle: './src/app.jsx',
-        ceshi : './src/ceshi.jsx'
+        ceshi : './src/ceshi.jsx',
+        page: '././src/page.js'
     },
     output: {
         path: __dirname,
