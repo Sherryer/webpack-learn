@@ -37,10 +37,7 @@ module.exports = {
               }
             },
             {
-              loader: 'postcss-loader',
-              options: {
-                  remUnit: 75
-              }
+              loader: 'postcss-loader'
             }
           ]
         })

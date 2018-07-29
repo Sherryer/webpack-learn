@@ -7,3 +7,9 @@
 .dark {
     color: #1000a9;
 }
+.border {
+    width: 750px;
+    border: 1px solid black;
+    transform: translate(0, 10px);
+    box-sizing: border-box;
+}

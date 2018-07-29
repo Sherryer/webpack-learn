@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+        }
+    </style>
     <link rel="stylesheet" href="./dist/src/style.css">
 </head>
 <body>
@@ -11,3 +17,20 @@
 <!--<script crossorigin src="https://unpkg.com/react@16.3.0/umd/react.development.js"></script>-->
 <!--<script crossorigin src="https://unpkg.com/react-dom@16.3.0/umd/react-dom.development.js"></script>-->
 <script src="dist/main.js"></script>
+<script>
+  (function (doc, win) {
+    var docEl = doc.documentElement
+    var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
+    var recalc = function () {
+      var clientWidth = docEl.clientWidth
+      if (!clientWidth) return
+      docEl.style.fontSize = 20 * (clientWidth / 320) + 'px'
+    }
+
+    if (!doc.addEventListener) return
+    win.addEventListener(resizeEvt, recalc, false)
+    recalc()
+    // hack兼容某些特殊机型
+    doc.addEventListener('DOMContentLoaded', recalc, false)
+  })(document, window)
+</script>
