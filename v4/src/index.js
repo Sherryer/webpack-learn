@@ -1,66 +1,18 @@
-import React, {Component} from 'react'
-import reactDom from 'react-dom'
-import styles from './style.css'
+import React, { Component } from 'react'
+import ReactDom from 'react-dom'
+import Son from './components/son.jsx'
+// import "@babel/polyfill";
 
+var Aa = (props) => (
+  <h1 key="header1" name="我"><span>哈哈！</span>我是header.{props.kk}</h1>
+)
 
-class App2 extends Component {
-  constructor(){
-    super()
-    this.state = {a: 111}
-  }
-
-  shouldComponentUpdate () {
-    console.log('shouldComponentUpdate')
-    return true
-  }
-
-  // componentWillUpdate () {
-  //     // 可能被调用多次
-  //     console.log('componentWillUpdate')
-  // }
-  //
-  // componentWillReceiveProps () {
-  //     // 可能被调用多次
-  //     console.log('componentWillReceiveProps')
-  // }
-
-  componentDidUpdate (prevProps, prevState, snapshot) {
-    console.log('componentDidUpdate')
-    console.log(snapshot)
-  }
-
-  // componentWillMount () {
-  //     console.log('componentWillMount')
-  // }
-
-  componentDidMount () {
-    console.log('componentDidMount')
-  }
-
-
-  static getDerivedStateFromProps () {
-    console.log('getDerivedStateFromProps')
-    return null
-  }
-
-  getSnapshotBeforeUpdate () {
-    console.log('getSnapshotBeforeUpdate')
-    let z = this.state.a
-    return this.refs.aa
-  }
-
-  click () {
-    this.setState({a: ++this.state.a})
-  }
-
+class Test extends Component {
   render () {
-    console.log('render')
-    let style = {}
-    return (
-      <div ref='aa' className={styles.border} onClick={this.click.bind(this)}>{this.state.a}</div>
-    )
+    console.log(Object.values)
+    var dom = <Aa kk={'hehe1'}/>
+    return <div>{dom}<Son/></div>
   }
 }
 
-
-reactDom.render( <App2/>, document.getElementById('dom'))
+ReactDom.render(<Test/>, document.getElementById('dom'))

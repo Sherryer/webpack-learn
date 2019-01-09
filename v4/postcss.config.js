@@ -2,6 +2,6 @@ module.exports = {
     plugins: [
         require('precss'),
         require('autoprefixer'),
-        require('postcss-px2rem')({remUnit: 46.875})
+        // require('postcss-px2rem')({remUnit: 46.875})
     ]
 }

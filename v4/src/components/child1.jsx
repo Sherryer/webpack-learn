@@ -6,13 +6,13 @@ export default class Test1 extends Component{
         this.state = {a: 1}
     }
     componentWillMount(){
-        console.log('222WillMount')
+        console.log('子WillMount')
     }
     componentDidMount () {
-        console.log('222DidMount')
+        console.log('子DidMount')
     }
     componentDidUpdate () {
-        console.log('子级')
+        console.log('子DidUpdate')
     }
     // shouldComponentUpdate () {
     //     return false
@@ -21,8 +21,12 @@ export default class Test1 extends Component{
         this.setState({a: ++this.state.a})
     }
     render () {
+      console.log('子render')
         return (
+          <div>
             <div onClick={this.click.bind(this)}>test{this.state.a}</div>
+            <div >props:{this.props.sonprops}</div>
+          </div>
         )
     }
 }

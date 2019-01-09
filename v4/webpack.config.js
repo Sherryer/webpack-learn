@@ -1,9 +1,14 @@
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const testPlugin = require('./ceshi/testPlugin')
 const px2rem = require('postcss-px2rem')
 const path = require('path')
 
 module.exports = {
+  entry: {
+    main: ['./src/index.js']
+  },
   module: {
     rules: [
       {
@@ -49,6 +54,8 @@ module.exports = {
     // 'react-dom': 'ReactDOM'
   },
   plugins: [
-    new ExtractTextPlugin('src/style.css')
+    new ExtractTextPlugin('src/style.css'),
+    new BundleAnalyzerPlugin()
+    // new testPlugin('hahha')
   ]
 }

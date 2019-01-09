@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import reactDom from 'react-dom'
 
+// 结论：
+// 首次渲染： getDerivedStateFromProps - render - componentDidMount
+// update： getDerivedStateFromProps - shouldComponentUpdate - render - getSnapshotBeforeUpdate - componentDidUpdate
 
 class App2 extends Component {
     constructor(){
@@ -36,10 +39,15 @@ class App2 extends Component {
         console.log('componentDidMount')
     }
 
-
-    static getDerivedStateFromProps () {
-        console.log('getDerivedStateFromProps')
-        return null
+    static getDerivedStateFromProps(props, state) {
+      console.log('getDerivedStateFromProps')
+    if ( props.name !== state.name ) {
+      return {
+        name: props.name,
+        list: null
+      };
+    }
+    return null;
     }
 
     getSnapshotBeforeUpdate () {

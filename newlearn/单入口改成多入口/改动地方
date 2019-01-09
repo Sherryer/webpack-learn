@@ -1,0 +1,77 @@
+base：
+entry 增加新入口
+
+dev：
+devServer 的 rewrites 增加响应路由的 rewrite
+[
+    { from: /^\/openapi\/mobile/, to: '/mobile.html' },
+    { from: /^\/openapi\/pc/, to: '/pc.html' }
+]
+
+plugins 里添加htmlwebpackplugin，chunks填写 entry的名字
+
+    new HtmlWebpackPlugin({
+      filename: 'pc.html',
+      template: 'template/pc.html',
+      inject: true,
+      chunks: ['pc']        // 对应entry js的名字
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'mobile.html',
+      template: 'template/mobile.html',
+      inject: true,
+      chunks: ['mobile']    // 对应entry js的名字
+    }),
+
+prod：
+plugins 里添加htmlwebpackplugin， filename 根据当前是否是qa环境设置（为了线上nginx打到的环境地址和qa环境地址一致）
+    new HtmlWebpackPlugin({
+      filename: process.env.QA === 'qa'? config.build.qaPc : config.build.pc,
+      template: 'template/pc.html',
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency',
+      QA: process.env.QA,                           // 在模版里注入QA变量
+      chunks: ['manifest', 'vendor', 'pc']
+    }),
+    new HtmlWebpackPlugin({
+      filename: process.env.QA === 'qa'? config.build.qaMobile : config.build.mobile,
+      template: 'template/mobile.html',
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency',
+      QA: process.env.QA,                           // 在模版里注入QA变量
+      chunks: ['manifest', 'vendor', 'mobile']
+    }),
+
+
+    --------
+
+package.json 里添加  "build-qa": "cross-env QA=qa node build/build.js"
+
+
+模版：
+
+模版里可以根据 htmlWebpackPlugin.options.QA 进行判断
+  <% if (process.env.NODE_ENV == 'development') { %>
+  <script src="a"></script>
+  <% } else if (htmlWebpackPlugin.options.QA == 'qa') { %>
+  <script src="b"></script>
+  <% } else if (process.env.NODE_ENV == 'production') { %>
+  <script src="c"></script>
+  <% } %>
+
