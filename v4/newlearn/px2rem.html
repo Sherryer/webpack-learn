@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    // 原理：除数16是标准，
+    // 如果想 750 屏幕，remUnit 就写 750/16 = 46.875，此时750宽度为16rem。
+    // 如果想 1000 屏幕，remUnit 就写 1000/16 = 62.5，此时1000宽度为16rem。
+    // 再通过监听 resize 事件，动态修改html尺寸实现适配
+
+    // 750为标准
+// 模式一
+
+    require('postcss-px2rem')({remUnit: 46.875})
+
+    (function (doc, win) {
+        var docEl = doc.documentElement
+        var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
+        var recalc = function () {
+            var clientWidth = docEl.clientWidth
+            if (!clientWidth) return
+            docEl.style.fontSize = 20 * (clientWidth / 320) + 'px'
+        }
+
+        if (!doc.addEventListener) return
+        win.addEventListener(resizeEvt, recalc, false)
+        recalc()
+        // hack兼容某些特殊机型
+        doc.addEventListener('DOMContentLoaded', recalc, false)
+    })(document, window)
+
+
+// 模式二
+    require('postcss-px2rem')()
+
+    require('postcss-px2rem')()
+
+    (function (doc, win) {
+        var docEl = doc.documentElement
+        var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
+        var recalc = function () {
+            var clientWidth = docEl.clientWidth
+            if (!clientWidth) return
+            docEl.style.fontSize = (clientWidth / 16) + 'px'
+        }
+
+        if (!doc.addEventListener) return
+        win.addEventListener(resizeEvt, recalc, false)
+        recalc()
+        // hack兼容某些特殊机型
+        doc.addEventListener('DOMContentLoaded', recalc, false)
+    })(document, window)
+
+</script>
+</html>

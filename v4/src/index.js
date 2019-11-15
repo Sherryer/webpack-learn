@@ -1,18 +1,37 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import ReactDom from 'react-dom'
-import Son from './components/son.jsx'
-// import "@babel/polyfill";
 
-var Aa = (props) => (
-  <h1 key="header1" name="我"><span>哈哈！</span>我是header.{props.kk}</h1>
-)
+// var Aa = (props) => {
+//   const [number, setNumber] = useState(0)
+//   return (
+//     <h1 key="header1" name="我">
+//       <span onClick={() => {setNumber(1 + number)}}>哈哈！ {{number}}</span>
+//       我是header.{props.kk}
+//     </h1>
+//   )
+// }
 
-class Test extends Component {
-  render () {
-    console.log(Object.values)
-    var dom = <Aa kk={'hehe1'}/>
-    return <div>{dom}<Son/></div>
-  }
+function Example() {
+  // Declare a new state variable, which we'll call "count"
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
 }
 
-ReactDom.render(<Test/>, document.getElementById('dom'))
+// class Test extends Component {
+//   render () {
+//     return <div>
+//       123
+//       <Example/>
+//     </div>
+//   }
+// }
+
+ReactDom.render(<Example/>, document.getElementById('dom'))

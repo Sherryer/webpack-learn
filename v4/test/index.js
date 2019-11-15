@@ -1,13 +1,22 @@
-var moment = require('moment')
+var assert = require('assert');
 
-var timeList = [{StartTime: 1,EndTime: 3}, {StartTime: 1,EndTime: 3}, {StartTime: 3,EndTime: 5}]
+describe('#hello.js', () => {
 
-function isHasRepeatTime(timeList) {
-  timeList.map(()=>{
+  describe('#sum()', () => {
+    it('sum() should return 0', () => {
+      assert.strictEqual(0, 0);
+    });
 
-  })
-}
+    it('sum(1) should return 1', () => {
+      assert.strictEqual(2, 1);
+    });
 
-// var z = isHasRepeatTime(timeList)
+    it('sum(1, 2) should return 3', () => {
+      assert.strictEqual(3, 3);
+    });
 
-// console.log(z)
+    it('sum(1, 2, 3) should return 6', () => {
+      assert.strictEqual(6, 6);
+    });
+  });
+});
