@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>-->
+</head>
+<body>
+</body>
+<script>
+    var arr = [11, 22, 33, 44]
+    function demo(a) {
+        console.log(a)   // 1
+    }
+    demo (1, 2, 3, 4)
+
+    function demo2(...a) {
+        console.log(a)   // [1, 2, 3, 4]
+    }
+    demo2 (1, 2, 3, 4)
+
+
+    function red() {
+
+    }
+
+    arr.reduce((a, b) => {
+        console.log(a, b)
+    }, 1)
+</script>
+</html>

@@ -7,12 +7,17 @@
     "start": "webpack --color --progress --watch",
     "dev": "webpack-dev-server",
     "build": "webpack",
+    "server": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
+    "dataloader": "^2.0.0",
+    "moment": "^2.24.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
@@ -22,6 +27,7 @@
     "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@babel/plugin-proposal-decorators": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
     "autoprefixer": "^9.7.1",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
@@ -29,7 +35,8 @@
     "css-loader": "^3.2.0",
     "eslint": "^6.6.0",
     "eslint-loader": "^3.0.2",
-    "html-webpack-plugin": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^4.0.0-beta.11",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.8.0",
@@ -40,6 +47,8 @@
     "terser-webpack-plugin": "^2.2.1",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.2",
+    "url-loader": "^2.2.0",
+    "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.9.0"
   }
 }

@@ -1,0 +1,17 @@
+1. 配置 package.json 中的 bin
+    "bin": {
+          "testpkg01": "./bin/testpkg01.js"
+      }
+
+2. 配置用 node 执行 testpkg01.js
+    #! /usr/bin/node
+
+3. npm link 把当前项目 link 到全局，文件夹的名字作为全局包的名字 testPackage01
+
+    up to date in 10.451s
+    /usr/local/bin/testpkg01 -> /usr/local/lib/node_modules/testpackage01/bin/testpkg01.js
+    /usr/local/lib/node_modules/testpackage01 -> /Users/sherry/my/jsproject/webpack-learn/linklearn/testPackage01
+
+4. 其他项目中 npm link testPackage01 把 testPackage01 引入
+
+5. npx testpkg01
