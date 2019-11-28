@@ -1,24 +1,18 @@
 import * as React from 'react'
 import { render } from 'react-dom'
 import {Component} from "react";
-import './style.css'
+import style from './style.css'
 
-var content = {
-    display: 'flex',
-    height: '100%'
-}
+console.log(333, style)
 
-var left = {
-    height: '100%'
-}
 
 class Layout extends React.Component {
     render () {
         return (
             <div>
-                <h1>title</h1>
-                <div style={content}>
-                    <div style={left}>11</div>
+                <div className={style.title}>title</div>
+                <div className={style.content}>
+                    <div className={style.leftParg}>11</div>
                     <div id='dom'>22</div>
                 </div>
             </div>
