@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const webpack = require('webpack')
 const path = require('path')
 
-console.log(process.env.NODE_ENV)
+// console.log(process.env.NODE_ENV)
 
 // const devMode = process.env.NODE_ENV !== 'production';
 const devMode = true;
@@ -18,6 +18,7 @@ module.exports = {
     entry: {
         boundle: './src/index.js',
         newlearn: './newlearn/index.js',
+        feature: './feature/src/index.js',
     },
     output: {
         path: `${__dirname}/${buildFileName}/`,
@@ -66,6 +67,9 @@ module.exports = {
             }
         }
     },
+    // resolveLoader: {
+    //     modules: ['node_modules', path.resolve(__dirname, 'loaders')]               // 加载 loader 时候按照 node_modules 找不到，去 loaders 里找
+    // },
 
     module: {
         // noParse: /jquery/,                                                      // 配置某些包没有依赖其他模块，无需解析，增加开发环境编译速度
@@ -164,6 +168,16 @@ module.exports = {
                 collapseWhitespace: true,
             },
             chunks: ['newlearn', 'common', 'vendor']
+        }),
+
+        new HtmlWebpackPlugin({
+            template: './template/index.html',
+            filename: `feature.html`,
+            minify: {
+                removeAttributeQuotes: true,
+                collapseWhitespace: true,
+            },
+            chunks: ['feature', 'vendor']
         }),
 
         new MiniCssExtractPlugin({

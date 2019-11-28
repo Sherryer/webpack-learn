@@ -8,24 +8,39 @@
 <body>
 </body>
 <script>
-    var arr = [11, 22, 33, 44]
-    function demo(a) {
-        console.log(a)   // 1
-    }
-    demo (1, 2, 3, 4)
-
-    function demo2(...a) {
-        console.log(a)   // [1, 2, 3, 4]
-    }
-    demo2 (1, 2, 3, 4)
-
-
-    function red() {
-
+    var data = {
+        '%a%': 1,
+        '%b%': 2
     }
 
-    arr.reduce((a, b) => {
-        console.log(a, b)
-    }, 1)
+    var source = {
+        title: {
+            data: '%a%'
+        },
+        body: {
+            data: '%b%'
+        }
+    }
+
+    function setProxy(obj) {
+        return new Proxy(obj, {
+            get: function (target, key, receiver) {
+                let value = target[key]
+                console.log(value)
+                if (typeof value === 'object') {
+                    return setProxy(value)
+                }
+                if (data.hasOwnProperty(value)) {
+                    if ('需要把 target[key] 的值替换为 data[value]') {
+                        target[key] = data[value]
+                    }
+                    return data[value]
+                }
+                return value;
+            },
+        })
+    }
+
+    var obj = setProxy(source)
 </script>
 </html>

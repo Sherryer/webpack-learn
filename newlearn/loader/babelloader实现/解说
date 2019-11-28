@@ -1,0 +1,14 @@
+一个loader 就是个方法
+
+1. 需要拿到 webpack 中配置的 options
+    通过 loader-utils 拿到
+    var loaderUtils = require('loader-utils')
+    var options = loaderUtils.getOptions(this)
+
+    如果相对 options 进行校验 使用 schema-utils https://www.npmjs.com/package/schema-utils
+
+2. 对于异步操作，通过 this.async 设置返回值
+    var callback = this.async()
+    ... 一顿异步操作后
+    callback(err, result.code, result.map)
+    三个参数，错误、源码、sourcemap

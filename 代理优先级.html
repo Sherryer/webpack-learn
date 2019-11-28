@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div>
+    结论：类似于洋葱
+</div>
+<div>
+    最外层proxy 包裹内层proxy 包裹内层defineProperty
+</div>
+<div>
+    写入：从最外层开始调用依次向内
+</div>
+<div>
+    读取：从内向外依次调用
+</div>
+</body>
+<script>
+    function creatProxy (obj) {
+        return new Proxy(obj, {
+            set: (target, key, value) => {
+                console.log('Proxy set:', target, key, value)
+                // target[key] = value
+                target[key] = '就改'
+            },
+            get: (target, key) => {
+                console.log('Proxy get:', target, key, target[key])
+                // return target[key]
+                return '就不管'
+            }
+        })
+    }
+    function creatProxy2 (obj) {
+        return new Proxy(obj, {
+            set: (target, key, value) => {
+                console.log('Proxy set2:', target, key, value)
+                // target[key] = value
+                target[key] = '就改2'
+            },
+            get: (target, key) => {
+                console.log('Proxy get2:', target, key, target[key])
+                // return target[key]
+                return '就不管2'
+            }
+        })
+    }
+    var obj = {
+        a: 1,
+        z: 99
+    }
+    function defineReactive (obj) {
+        let z = {}
+        Object.defineProperty(obj, 'a', {
+            get () {
+                console.log('defineReactive get', z['a'])
+                return z['a']
+            },
+            set (value) {
+                console.log('defineReactive set', value)
+                z['a'] = '哼'
+            }
+        })
+        return obj
+    }
+    obj = creatProxy(obj)
+    obj = creatProxy2(obj)
+    obj = defineReactive(obj)
+    obj.a = 4
+    console.log('上写----下读')
+    console.log(obj.a)
+</script>
+</html>
