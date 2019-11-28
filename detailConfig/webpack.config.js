@@ -18,7 +18,7 @@ module.exports = {
     entry: {
         boundle: './src/index.js',
         newlearn: './newlearn/index.js',
-        feature: './feature/src/index.js',
+        ceshi: './ceshi/src/index.jsx',
     },
     output: {
         path: `${__dirname}/${buildFileName}/`,
@@ -28,7 +28,7 @@ module.exports = {
     mode: devMode ? 'development': 'production',    // 'development' or 'production'
     devtool: 'eval-source-map',
     devServer: {                                    // 开发服务器的配置
-        port: 3000,                                 // 端口
+        port: 5000,                                 // 端口
         progress: true,                             // 进度条
         open: true,                                 // 自动打开浏览器
         // compress: true,                          // 压缩
@@ -74,12 +74,12 @@ module.exports = {
     module: {
         // noParse: /jquery/,                                                      // 配置某些包没有依赖其他模块，无需解析，增加开发环境编译速度
         rules: [
-            {
-                test: /\.(js|jsx|ts|tsx)$/,
-                use: ['eslint-loader'],
-                enforce: 'pre',                                                 // 让这个 loader 在其他 loader 之前执行
-                exclude: /node_modules/
-            },
+            // {
+            //     test: /\.(js|jsx|ts|tsx)$/,
+            //     use: ['eslint-loader'],
+            //     enforce: 'pre',                                                 // 让这个 loader 在其他 loader 之前执行
+            //     exclude: /node_modules/
+            // },
             {
                 test: /\.(le|c)ss$/,
                 use: [
@@ -96,7 +96,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(js|ts|tsx)$/,
+                test: /\.(js|jsx|ts|tsx)$/,
                 use: [
                     {
                         loader: 'babel-loader',
@@ -171,13 +171,13 @@ module.exports = {
         }),
 
         new HtmlWebpackPlugin({
-            template: './template/index.html',
-            filename: `feature.html`,
+            template: './template/ceshi.html',
+            filename: `ceshi.html`,
             minify: {
                 removeAttributeQuotes: true,
                 collapseWhitespace: true,
             },
-            chunks: ['feature', 'vendor']
+            chunks: ['ceshi', 'vendor']
         }),
 
         new MiniCssExtractPlugin({
