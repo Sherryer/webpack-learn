@@ -21,17 +21,49 @@ function Example() {
       <button onClick={() => setCount(count + 1)}>
         Click me
       </button>
+      <Test/>
     </div>
   );
 }
 
-// class Test extends Component {
-//   render () {
-//     return <div>
-//       123
-//       <Example/>
-//     </div>
-//   }
-// }
+class Parent extends Component {
+    constructor(p){
+        super(p)
+        this.state = {
+            count: 1
+        }
+    }
 
-ReactDom.render(<Example/>, document.getElementById('dom'))
+    render() {
+        let count = this.state.count
+        return (
+            <div>
+                <p>You22222 clicked {count} times</p>
+                <button onClick={() => this.setState({count: count + 1})}>
+                    Click me
+                </button>
+                <Test/>
+            </div>
+        );
+    }
+}
+
+class Test extends Component {
+    componentDidMount() {
+        console.log('子 mount')
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('子 update')
+    }
+
+    render () {
+        return (
+            <div>
+                123
+            </div>
+        )
+    }
+}
+
+ReactDom.render(<Parent/>, document.getElementById('dom'))

@@ -8,6 +8,8 @@
     "dev": "webpack-dev-server",
     "build": "webpack",
     "server": "node server.js",
+    "config-dev": "webpack-dev-server --config config/webpack.dev.js",
+    "config-prod": "webpack --config config/webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -53,6 +55,7 @@
     "typescript": "^3.7.2",
     "url-loader": "^2.2.0",
     "webpack-dev-middleware": "^3.7.2",
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-server": "^3.9.0",
+    "webpack-merge": "^4.2.2"
   }
 }

@@ -1,34 +1,28 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')                        // 插入 js
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')                 // 用于替换style-loader把style-loader插入html页面的css通过link标签引入
-const TerserJSPlugin = require('terser-webpack-plugin')                         // 替换 uglifyjs-webpack-plugin 解决 uglifyjs 不支持es6语法问题
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')   // css 压缩
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const webpack = require('webpack')
 const path = require('path')
 
-// console.log(process.env.NODE_ENV)
-
-// const devMode = process.env.NODE_ENV !== 'production';
-const devMode = true
-
 const buildFileName = 'dist'
 const cdnPath = ''
 
-module.exports = {
+
+module.exports = (devMode) => ({
     entry: {
         boundle: './src/index.js',
         newlearn: './newlearn/index.js',
         ceshi: './ceshi/src/index.jsx',
     },
     output: {
-        path: `${__dirname}/${buildFileName}/`,
+        path: path.resolve(__dirname, `../${buildFileName}/'`),
         filename: 'js/[name].[hash:20].js',         // 哈希 20 位
         publicPath: devMode ? '' : cdnPath
     },
     mode: devMode ? 'development' : 'production',    // 'development' or 'production'
     devtool: 'eval-source-map',
     devServer: {                                    // 开发服务器的配置
-        port: 5000,                                 // 端口
+        port: 4000,                                 // 端口
         progress: true,                             // 进度条
         open: true,                                 // 自动打开浏览器
         // compress: true,                          // 压缩
@@ -48,25 +42,6 @@ module.exports = {
             // })
         }
     },
-    optimization: {                                 // 优化项。仅限 mode 为 production 时才会走这里的配置
-        minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
-        splitChunks: {                              // 用于代替 commonChunck plugin 插件的。多入口时，把引用的相同资源做拆分优化
-            cacheGroups: {  // 从上到下抽离
-                common: {   // 公共模块
-                    minSize: 0,
-                    minChunks: 2,
-                    chunks: 'initial'
-                },
-                vendor: {
-                    priority: 10,                    // 抽离的权重，有限抽离权重大的
-                    test: /node_modules/,
-                    minSize: 0,
-                    minChunks: 2,
-                    chunks: 'initial'
-                }
-            }
-        }
-    },
     // resolveLoader: {
     //     modules: ['node_modules', path.resolve(__dirname, 'loaders')]               // 加载 loader 时候按照 node_modules 找不到，去 loaders 里找
     // },
@@ -74,12 +49,12 @@ module.exports = {
     module: {
         // noParse: /jquery/,                                                      // 配置某些包没有依赖其他模块，无需解析，增加开发环境编译速度
         rules: [
-            // {
-            //     test: /\.(js|jsx|ts|tsx)$/,
-            //     use: ['eslint-loader'],
-            //     enforce: 'pre',                                                 // 让这个 loader 在其他 loader 之前执行
-            //     exclude: /node_modules/
-            // },
+            {
+                test: /\.(js|jsx|ts|tsx)$/,
+                use: ['eslint-loader'],
+                enforce: 'pre',                                                 // 让这个 loader 在其他 loader 之前执行
+                exclude: /node_modules/
+            },
             {
                 test: /\.(le|c)ss$/,
                 use: [
@@ -193,4 +168,5 @@ module.exports = {
             chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css',
         }),
     ],
-}
+})
+
