@@ -93,11 +93,12 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: devMode ? {
-                                localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                                context: path.resolve(__dirname, 'src'),
-                                hashPrefix: 'my-custom-hash',
-                            } : true,
+                            modules: true,
+                            // modules: devMode ? {
+                            //     localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                            //     context: path.resolve(__dirname, 'src'),
+                            //     hashPrefix: 'my-custom-hash',
+                            // } : true,
                         }
                     },
                     'postcss-loader',

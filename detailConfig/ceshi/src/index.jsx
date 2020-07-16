@@ -3,11 +3,11 @@ import { render } from 'react-dom'
 import {Component} from "react";
 import style from './style.css'
 
-console.log(333, style)
 
 
 class Layout extends React.Component {
     render () {
+        console.log(this)
         return (
             <div>
                 <div className={style.title}>title</div>
