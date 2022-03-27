@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack --color --progress --watch --mode development",
+    "dev": "webpack --color --progress --watch --mode development",
     "build": "webpack --progress --mode production"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.2.0",
+    "html2pdf.js": "^0.9.2",
     "moment": "^2.22.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -26,6 +28,8 @@
     "autoprefixer": "^8.2.0",
     "babel-loader": "^8.0.5",
     "css-loader": "^0.28.11",
+    "echarts": "^4.2.1",
+    "echarts-for-react": "^2.0.14",
     "eslint": "^4.19.1",
     "eslint-plugin-react": "^7.7.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
@@ -37,6 +41,7 @@
     "vconsole": "^3.1.0",
     "webpack": "^4.3.0",
     "webpack-bundle-analyzer": "^3.0.3",
-    "webpack-cli": "^2.0.13"
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^3.11.2"
   }
 }

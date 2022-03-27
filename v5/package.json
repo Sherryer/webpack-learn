@@ -1,0 +1,33 @@
+{
+  "name": "v5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack --config webpack.config.js --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-env": "^7.14.2",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.37.1",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^4.6.0",
+    "worker-loader": "^3.0.8"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.14.2",
+    "@babel/preset-react": "^7.13.13",
+    "antd": "^4.17.3",
+    "immutability-helper": "^3.1.1",
+    "lodash": "^4.17.21",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-sortablejs": "^6.0.0",
+    "react-virtualized": "^9.22.3"
+  }
+}

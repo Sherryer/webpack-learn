@@ -17,8 +17,8 @@ const cdnPath = ''
 module.exports = {
     entry: {
         boundle: './src/index.js',
-        newlearn: './newlearn/index.js',
-        ceshi: './ceshi/src/index.jsx',
+        // newlearn: './newlearn/index.js',
+        // ceshi: './ceshi/src/index.jsx',
     },
     output: {
         path: `${__dirname}/${buildFileName}/`,
@@ -33,6 +33,7 @@ module.exports = {
         open: true,                                 // 自动打开浏览器
         // compress: true,                          // 压缩
         contentBase: `./${buildFileName}`,          // 将 dist 作为服务静态资源的 base 路径,
+        disableHostCheck: true,                     // 不进行 host 检查 Invalid Host header
 
         proxy: {                                    // 代理配置
             '/api': {
@@ -67,8 +68,9 @@ module.exports = {
             }
         }
     },
-    // resolveLoader: {
-    //     modules: ['node_modules', path.resolve(__dirname, 'loaders')]               // 加载 loader 时候按照 node_modules 找不到，去 loaders 里找
+    // resolveLoader: {                                                            // 配置 loader 加载顺序 pre normal（默认值） inline（行内的，不用在config配，需要在文件中引用） post
+                                                                                   // inline loader 例子：let str = require('-!inline-loader!./a.js');  -! 就不会再为 a.js 触发 pre 和 normal loader 了；!! 只触发行内 loader
+    //     modules: ['node_modules', path.resolve(__dirname, 'loaders')]           // 加载 loader 时候按照 node_modules 找不到，去 loaders 里找
     // },
 
     module: {
@@ -78,6 +80,8 @@ module.exports = {
             //     test: /\.(js|jsx|ts|tsx)$/,
             //     use: ['eslint-loader'],
             //     enforce: 'pre',                                                 // 让这个 loader 在其他 loader 之前执行
+            //     enforce: 'normal',                                              // 默认值
+            //     enforce: 'post',                                                // 让这个 loader 在其他 loader 之后执行
             //     exclude: /node_modules/
             // },
             {
@@ -135,6 +139,10 @@ module.exports = {
                         // publicPath: ''               // 图片的 cdn Path
                     }
                 }]
+            },
+            {
+                test: /\.txt$/i,
+                use: 'raw-loader',
             },
         ]
     },

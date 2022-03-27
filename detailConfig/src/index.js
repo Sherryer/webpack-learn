@@ -3,6 +3,12 @@ import './less.less'
 import * as face from './face.jpg'
 import * as React from 'react'
 import { render } from 'react-dom'
+import { value } from './data2/index'
+import textData from './test/ceshi.txt'
+
+console.log('raw-loader:', textData)
+
+console.log('data2:', value)
 
 console.log(2222, face)
 console.log(3333, React)

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="button">点点点</button>
+</body>
+<script src="./dist/main.js"></script>
+<script>
+    var a = Promise.resolve('aa')
+    var b = Promise.resolve('bb')
+    var c = Promise.resolve('cc')
+
+    Promise.all([a, b, c]).then(data => {
+        console.log(data)
+    })
+</script>
+</html>

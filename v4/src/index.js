@@ -1,4 +1,8 @@
 import React, { Component, useState } from 'react'
+// import Charts from './components/charts.jsx'
+// import Charts from './components/duidiezhu.jsx'
+// import Charts from './components/bolang.jsx'
+import Charts from './components/part3.jsx'
 import ReactDom from 'react-dom'
 
 // var Aa = (props) => {
@@ -10,6 +14,8 @@ import ReactDom from 'react-dom'
 //     </h1>
 //   )
 // }
+
+// 需要的数据结构
 
 function Example() {
   // Declare a new state variable, which we'll call "count"
@@ -34,6 +40,9 @@ class Parent extends Component {
         }
     }
 
+    componentDidMount() {
+    }
+
     render() {
         let count = this.state.count
         return (
@@ -43,6 +52,10 @@ class Parent extends Component {
                     Click me
                 </button>
                 <Test/>
+
+                <div style={{position: 'relative', left: '300px', paddingLeft: '200px'}}>
+                    <Charts/>
+                </div>
             </div>
         );
     }

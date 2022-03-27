@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
+    "antd": "^4.14.1",
     "dataloader": "^2.0.0",
     "moment": "^2.24.0",
     "react": "^16.12.0",
@@ -49,6 +50,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
+    "raw-loader": "^4.0.2",
     "style-loader": "^1.0.0",
     "terser-webpack-plugin": "^2.2.1",
     "ts-loader": "^6.2.1",
