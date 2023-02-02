@@ -41,7 +41,7 @@
     "vconsole": "^3.1.0",
     "webpack": "^4.3.0",
     "webpack-bundle-analyzer": "^3.0.3",
-    "webpack-cli": "^2.0.13",
+    "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^3.11.2"
   }
 }
